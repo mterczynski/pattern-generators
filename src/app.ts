@@ -15,7 +15,7 @@ export class App {
     this.canvas.height = innerHeight;
 
     this.drawBackground();
-    this.patterns.line2.draw();
+    this.patterns.line2.draw("rgba(3, 149, 240, 0.4)");
   }
 
   private drawBackground() {

@@ -1,5 +1,5 @@
 import { Line } from "../types";
-import { getRandomPointOnLine, getRandomArrayElement } from "../utils";
+import { getRandomPointOnLine, getRandomArrayElement, getLineLength } from "../utils";
 
 const lineCount = 900;
 const maxLineLength = 300;
@@ -11,8 +11,8 @@ function getRandomAngle() {
 
 function getInitLinesArray() {
   return [{
-    start: {x: 0, y: 50},
-    end: {x: 0, y: -50}
+    start: {x: 0, y: 500},
+    end: {x: 0, y: -500}
   }];
 }
 
@@ -35,12 +35,14 @@ export class LinePattern2 {
 
   private addLine() {
     const startLine = this.getRandomLine();
+    const startLineLength = getLineLength(startLine);
     const startPoint = getRandomPointOnLine(startLine);
     const angle = getRandomAngle();
+    const newLineLength = startLineLength * 0.6;
 
     const endPoint = {
-      x: startPoint.x + Math.sin(angle) * maxLineLength,
-      y: startPoint.y + Math.cos(angle) * maxLineLength,
+      x: startPoint.x + Math.sin(angle) * newLineLength,
+      y: startPoint.y + Math.cos(angle) * newLineLength,
     }
 
     const newLine = {
@@ -59,7 +61,7 @@ export class LinePattern2 {
     const ctx = this.context;
     const windowW = window.innerWidth;
     const windowH = window.innerHeight;
-    ctx.strokeStyle = lineColor || "rgba(3, 140, 252, 0.4)";
+    ctx.strokeStyle = lineColor || "rgba(3, 255, 129, 0.4)";
 
     this.lines.forEach(line => {
       ctx.beginPath();
