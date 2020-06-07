@@ -1,0 +1,8 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "mterczynski-tslint"
+  ],
+  "rules": {
+  }
+}
