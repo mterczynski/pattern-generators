@@ -16,7 +16,7 @@ function getInitLinesArray() {
   }];
 }
 
-export class LinePattern1 {
+export class LinePattern2 {
   private lines: Line[] = getInitLinesArray();
 
   constructor(private readonly context: CanvasRenderingContext2D) {}
