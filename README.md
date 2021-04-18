@@ -1,5 +1,7 @@
 # Line Pattern generator
 
+<img src="./assets/preview.png">
+
 ## Install dependencies
 
     yarn
