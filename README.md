@@ -2,15 +2,19 @@
 
 <img src="./assets/preview.png">
 
+## Prerequisites
+
+-   Node.js version 12.x
+-   npm version 6.x
+
 ## Install dependencies
 
-    yarn
+    npm i
 
 ## Run project in watch mode
 
-    yarn start
+    npm start
 
 ## Build project
 
-    yarn build
-
+    npm run build

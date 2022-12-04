@@ -6,8 +6,7 @@
     "start:open": "webpack-dev-server --open",
     "build": "webpack --mode=production"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "ts-loader": "^7.0.3",
     "tslint": "^6.1.2",
