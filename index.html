@@ -26,14 +26,25 @@
     #side-menu {
       width: 200px;
       height: 100vh;
-      background: white;
+      position: absolute;
+    }
+
+    .menu-button {
+      background-color: rgba(50, 50, 50, 1);
+      color: white;
+      width: 100px;
+      padding: 10px
     }
   </style>
 </head>
 
 <body>
   <div style="display: flex;">
-    <div id="side-menu"></div>
+    <div id="side-menu">
+      <button class="menu-button" id="button-generate">Generate</button>
+      <br/>
+      <button class="menu-button" id="button-download">Download</button>
+    </div>
     <canvas id="main-canvas"></canvas>
   </div>
 
