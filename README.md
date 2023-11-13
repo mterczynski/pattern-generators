@@ -4,8 +4,8 @@
 
 ## Prerequisites
 
--   Node.js version 12.x
--   npm version 6.x
+-   Node.js version 20.x (12+ should work)
+-   npm version 9.x (6+ should work)
 
 ## Install dependencies
 
