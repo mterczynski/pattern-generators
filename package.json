@@ -1,5 +1,5 @@
 {
-  "name": "typescript-webpack-threejs-template",
+  "name": "pattern-generators",
   "version": "1.0.0",
   "scripts": {
     "start": "vite",
