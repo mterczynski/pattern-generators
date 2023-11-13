@@ -2,17 +2,16 @@
   "name": "typescript-webpack-threejs-template",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack-dev-server",
-    "start:open": "webpack-dev-server --open",
-    "build": "webpack --mode=production"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vite": "^4.5.0"
+  },
   "devDependencies": {
     "ts-loader": "^7.0.3",
     "tslint": "^6.1.2",
-    "typescript": "^3.8.3",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0",
-    "webpack": "^4.43.0"
+    "typescript": "^3.8.3"
   }
 }

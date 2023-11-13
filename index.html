@@ -14,19 +14,31 @@
 
     body {
       overflow: hidden;
+      display: flex;
+      flex-shrink: 0;
     }
 
     #main-canvas {
-      position: absolute;
       height: 100%;
       width: 100%;
+    }
+
+    #side-menu {
+      width: 200px;
+      height: 100vh;
+      background: white;
     }
   </style>
 </head>
 
 <body>
-  <canvas id="main-canvas"></canvas>
-  <script src="dist/bundle.js"></script>
+  <div style="display: flex;">
+    <div id="side-menu"></div>
+    <canvas id="main-canvas"></canvas>
+  </div>
+
+  </div>
+  <script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>
