@@ -19,6 +19,7 @@ export class App {
     this.draw()
     this.addGenerateButtonListener()
     this.addDownloadButtonListener()
+    this.addInputChangeListeners()
   }
 
   private draw() {
@@ -71,6 +72,13 @@ export class App {
 
   private getAlphaValue() {
     return (document.getElementById('alpha-input') as HTMLInputElement).value
+  }
+
+  private addInputChangeListeners() {
+    (document.getElementById('alpha-input') as HTMLInputElement).addEventListener('change', () => this.draw());
+    (document.getElementById('color-input-1') as HTMLInputElement).addEventListener('change', () => this.draw());
+    (document.getElementById('color-input-2') as HTMLInputElement).addEventListener('change', () => this.draw());
+    (document.getElementById('color-background') as HTMLInputElement).addEventListener('change', () => this.draw());
   }
 
   private addDownloadButtonListener() {
