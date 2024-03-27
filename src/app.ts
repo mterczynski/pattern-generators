@@ -90,7 +90,7 @@ export class App {
         return
       }
       const link = document.createElement('a');
-      link.download = 'blue-green-line-art.jpg';
+      link.download = 'line-art.jpg';
       link.href = canvas.toDataURL()
       link.click();
     })
