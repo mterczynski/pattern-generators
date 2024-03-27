@@ -23,16 +23,19 @@ export class App {
 
   private draw() {
     this.drawBackground();
-    this.patterns.line2.draw("rgba(3, 149, 240, 0.4)");
-    this.patterns.line2.draw("rgba(0, 255, 128, 0.4)");
-    // this.patterns.line2.draw("rgba(200, 30, 60, 0.4)");
-    // this.patterns.line3.draw({red: 255, green: 255, blue: 255});
-    // this.patterns.line3.draw({red: 0, green: 0, blue: 0});
-    // this.patterns.line3.draw({red: 3, green: 149, blue: 240});
+    console.log(this.getColorInputValues())
+
+    const firstColor = this.getColorInputValues()[0]!
+    const secondColor = this.getColorInputValues()[1]!
+    const alpha = this.getAlphaValue()
+
+    this.patterns.line2.draw(`rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`);
+    this.patterns.line2.draw(`rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`);
   }
 
   private drawBackground() {
-    this.context.fillStyle = "rgb(0,0,0)";
+    const backgroundColor = (document.getElementById('color-background') as HTMLInputElement).value!
+    this.context.fillStyle = backgroundColor;
     this.context.fillRect(0, 0, innerWidth, innerHeight);
   }
 
@@ -42,6 +45,32 @@ export class App {
     button?.addEventListener('click', () => {
       this.draw()
     })
+  }
+
+  private getColorInputValues() {
+    function hexToRgb(hex: string) {
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+
+    return [
+      (document.getElementById('color-input-1') as HTMLInputElement).value,
+      (document.getElementById('color-input-2') as HTMLInputElement).value,
+    ].map(v => hexToRgb(v))
+  }
+
+  private getAlphaValue() {
+    return (document.getElementById('alpha-input') as HTMLInputElement).value
   }
 
   private addDownloadButtonListener() {
