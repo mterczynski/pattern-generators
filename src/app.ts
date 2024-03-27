@@ -29,9 +29,10 @@ export class App {
     const firstColor = this.getColorInputValues()[0]!
     const secondColor = this.getColorInputValues()[1]!
     const alpha = this.getAlphaValue()
+    const lineCount = (document.getElementById('input-line-count') as HTMLInputElement).valueAsNumber;
 
-    this.patterns.line2.draw(`rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`);
-    this.patterns.line2.draw(`rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`);
+    this.patterns.line2.draw({ lineColor: `rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`, lineCount });
+    this.patterns.line2.draw({ lineColor: `rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`, lineCount });
   }
 
   private drawBackground() {
@@ -63,7 +64,6 @@ export class App {
       } : null;
     }
 
-
     return [
       (document.getElementById('color-input-1') as HTMLInputElement).value,
       (document.getElementById('color-input-2') as HTMLInputElement).value,
@@ -79,6 +79,7 @@ export class App {
     (document.getElementById('color-input-1') as HTMLInputElement).addEventListener('change', () => this.draw());
     (document.getElementById('color-input-2') as HTMLInputElement).addEventListener('change', () => this.draw());
     (document.getElementById('color-background') as HTMLInputElement).addEventListener('change', () => this.draw());
+    (document.getElementById('input-line-count') as HTMLInputElement).addEventListener('change', () => this.draw());
   }
 
   private addDownloadButtonListener() {

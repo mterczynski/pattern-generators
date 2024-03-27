@@ -1,9 +1,6 @@
 import { Line } from "../types";
 import { getRandomPointOnLine, getRandomArrayElement, getLineLength } from "../utils";
 
-const lineCount = 900;
-const maxLineLength = 300;
-
 function getRandomAngle() {
   const angleCount = 8;
   return Math.floor(Math.random() * angleCount) * Math.PI / angleCount * 2;
@@ -11,24 +8,36 @@ function getRandomAngle() {
 
 function getInitLinesArray() {
   return [{
-    start: {x: 0, y: 500},
-    end: {x: 0, y: -500}
+    start: { x: 0, y: 500 },
+    end: { x: 0, y: -500 }
   }];
+}
+
+export interface LineOptions {
+  lineColor: string;
+  lineCount: number;
 }
 
 export class LinePattern2 {
   private lines: Line[] = getInitLinesArray();
 
-  constructor(private readonly context: CanvasRenderingContext2D) {}
+  constructor(
+    private readonly context: CanvasRenderingContext2D,
+    private options: LineOptions = {
+      lineColor: "rgba(3, 255, 129, 0.4)",
+      lineCount: 900,
+    }
+  ) { }
 
-  draw(lineColor?: string) {
+  draw(options?: LineOptions): void {
+    if (options) this.options = options;
     this.lines = getInitLinesArray();
     this.fillLinesArray();
-    this.drawAllLines(lineColor);
+    this.drawAllLines();
   }
 
   private fillLinesArray() {
-    for(let i=0; i<lineCount-1; i++) {
+    for (let i = 0; i < this.options.lineCount - 1; i++) {
       this.addLine();
     }
   }
@@ -57,11 +66,11 @@ export class LinePattern2 {
     return getRandomArrayElement(this.lines);
   }
 
-  private drawAllLines(lineColor?: string) {
+  private drawAllLines() {
     const ctx = this.context;
     const windowW = window.innerWidth;
     const windowH = window.innerHeight;
-    ctx.strokeStyle = lineColor || "rgba(3, 255, 129, 0.4)";
+    ctx.strokeStyle = this.options.lineColor || "rgba(3, 255, 129, 0.4)";
 
     this.lines.forEach(line => {
       ctx.beginPath();
