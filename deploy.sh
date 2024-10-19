@@ -7,7 +7,6 @@ cd ../mterczynski.github.io/pattern-generators/
 # 3. Commit in ../mterczynski.github.io
 git add .
 git commit -m "Update pattern-generators build: $(git log -1 --pretty=format:"%s")"
-git diff HEAD~1
 git status
-# 4. Do manually: push in ../mterczynski.github.io
-# git push
+# 4. Push in ../mterczynski.github.io
+git push
