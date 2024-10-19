@@ -1,7 +1,7 @@
 import { Line } from "../types";
 import { getRandomPointOnLine, getRandomArrayElement } from "../utils";
 
-const lineCount = 900;
+const lineCount = 4000;
 const maxLineLength = 300;
 
 function getRandomAngle() {
@@ -11,15 +11,15 @@ function getRandomAngle() {
 
 function getInitLinesArray() {
   return [{
-    start: {x: 0, y: 50},
-    end: {x: 0, y: -50}
+    start: { x: 0, y: 50 },
+    end: { x: 0, y: -50 }
   }];
 }
 
 export class LinePattern1 {
   private lines: Line[] = getInitLinesArray();
 
-  constructor(private readonly context: CanvasRenderingContext2D) {}
+  constructor(private readonly context: CanvasRenderingContext2D) { }
 
   draw(lineColor?: string) {
     this.lines = getInitLinesArray();
@@ -28,7 +28,7 @@ export class LinePattern1 {
   }
 
   private fillLinesArray() {
-    for(let i=0; i<lineCount-1; i++) {
+    for (let i = 0; i < lineCount - 1; i++) {
       this.addLine();
     }
   }

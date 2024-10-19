@@ -25,7 +25,7 @@ export class LinePattern2 {
     private readonly context: CanvasRenderingContext2D,
     private options: LineOptions = {
       lineColor: "rgba(3, 255, 129, 0.4)",
-      lineCount: 900,
+      lineCount: 4000,
     }
   ) { }
 
