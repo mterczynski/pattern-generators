@@ -1,5 +1,13 @@
 # 1. Build
 npm run build;
+
+echo "Please manually change assets ur to start with './'"
+read -p "Do you want to continue? (y/n): " answer
+if [[ "$answer" =~ ^[Nn]$ ]]; then
+  echo "You chose no. Exiting script."
+  exit 1  # Exits the script with a non-zero status
+fi
+
 # 2. Copy build to ../mterczynski.github.io
 rm -rf ../mterczynski.github.io/pattern-generators/
 cp -r ./dist ../mterczynski.github.io/pattern-generators/
