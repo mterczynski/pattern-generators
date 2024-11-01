@@ -1,7 +1,7 @@
 # 1. Build
 npm run build;
 
-echo "Please manually change assets ur to start with './'"
+echo "Please manually change assets url to start with './'"
 read -p "Do you want to continue? (y/n): " answer
 if [[ "$answer" =~ ^[Nn]$ ]]; then
   echo "You chose no. Exiting script."
