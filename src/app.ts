@@ -16,23 +16,44 @@ export class App {
     this.canvas.width = innerWidth;
     this.canvas.height = innerHeight;
 
+    this.updateUIForSelectedPattern();
     this.draw()
     this.addGenerateButtonListener()
     this.addDownloadButtonListener()
     this.addInputChangeListeners()
+    this.addPatternSelectorListener()
   }
 
   private draw() {
     this.drawBackground();
     console.log(this.getColorInputValues())
 
+    const selectedPattern = (document.getElementById('pattern-selector') as HTMLSelectElement).value;
     const firstColor = this.getColorInputValues()[0]!
     const secondColor = this.getColorInputValues()[1]!
     const alpha = this.getAlphaValue()
     const lineCount = (document.getElementById('input-line-count') as HTMLInputElement).valueAsNumber;
 
-    this.patterns.line2.draw({ lineColor: `rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`, lineCount });
-    this.patterns.line2.draw({ lineColor: `rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`, lineCount });
+    switch (selectedPattern) {
+      case 'line1':
+        // Pattern 1 uses single color with built-in alpha
+        this.patterns.line1.draw(`rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`);
+        break;
+      case 'line2':
+        // Pattern 2 uses two colors with alpha and line count (current implementation)
+        this.patterns.line2.draw({ lineColor: `rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`, lineCount });
+        this.patterns.line2.draw({ lineColor: `rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`, lineCount });
+        break;
+      case 'line3':
+        // Pattern 3 uses RGB object and handles alpha internally
+        this.patterns.line3.draw({ red: firstColor.r, green: firstColor.g, blue: firstColor.b });
+        break;
+      default:
+        // Default to pattern 2
+        this.patterns.line2.draw({ lineColor: `rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`, lineCount });
+        this.patterns.line2.draw({ lineColor: `rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`, lineCount });
+        break;
+    }
   }
 
   private drawBackground() {
@@ -80,6 +101,42 @@ export class App {
     (document.getElementById('color-input-2') as HTMLInputElement).addEventListener('change', () => this.draw());
     (document.getElementById('color-background') as HTMLInputElement).addEventListener('change', () => this.draw());
     (document.getElementById('input-line-count') as HTMLInputElement).addEventListener('change', () => this.draw());
+  }
+
+  private addPatternSelectorListener() {
+    (document.getElementById('pattern-selector') as HTMLSelectElement).addEventListener('change', () => {
+      this.updateUIForSelectedPattern();
+      this.draw();
+    });
+  }
+
+  private updateUIForSelectedPattern() {
+    const selectedPattern = (document.getElementById('pattern-selector') as HTMLSelectElement).value;
+    const color2Element = document.getElementById('color-input-2')?.parentElement;
+    const alphaElement = document.getElementById('alpha-input')?.parentElement;
+    const lineCountElement = document.getElementById('input-line-count')?.parentElement;
+
+    // Show/hide UI elements based on selected pattern
+    switch (selectedPattern) {
+      case 'line1':
+        // Pattern 1: Show 1 color, alpha, hide Color 2, hide line count
+        if (color2Element) color2Element.style.display = 'none';
+        if (alphaElement) alphaElement.style.display = 'flex';
+        if (lineCountElement) lineCountElement.style.display = 'none';
+        break;
+      case 'line2':
+        // Pattern 2: Show 2 colors, alpha, line count
+        if (color2Element) color2Element.style.display = 'flex';
+        if (alphaElement) alphaElement.style.display = 'flex';
+        if (lineCountElement) lineCountElement.style.display = 'flex';
+        break;
+      case 'line3':
+        // Pattern 3: Show 1 color, hide Color 2, alpha, line count (uses fixed values)
+        if (color2Element) color2Element.style.display = 'none';
+        if (alphaElement) alphaElement.style.display = 'none';
+        if (lineCountElement) lineCountElement.style.display = 'none';
+        break;
+    }
   }
 
   private addDownloadButtonListener() {
