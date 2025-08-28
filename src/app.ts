@@ -1,6 +1,7 @@
 import { LinePattern1 } from "./patterns/line-pattern-1";
 import { LinePattern2 } from "./patterns/line-pattern-2";
 import { LinePattern3 } from "./patterns/line-pattern-3";
+import { CirclePattern } from "./patterns/circle-pattern";
 
 export class App {
   private readonly canvas = document.getElementById('main-canvas') as HTMLCanvasElement;
@@ -10,6 +11,7 @@ export class App {
     line1: new LinePattern1(this.context),
     line2: new LinePattern2(this.context),
     line3: new LinePattern3(this.context),
+    circles: new CirclePattern(this.context),
   }
 
   constructor() {
@@ -31,6 +33,15 @@ export class App {
     const alpha = this.getAlphaValue()
     const lineCount = (document.getElementById('input-line-count') as HTMLInputElement).valueAsNumber;
 
+    // Draw the circle pattern with dynamic configuration
+    this.patterns.circles.draw({
+      circleCount: Math.floor(lineCount / 20), // Fewer circles than lines for performance
+      maxRadius: 200,
+      colorScheme: 'rainbow',
+      alpha: parseFloat(alpha)
+    });
+
+    // Also draw the existing line patterns for comparison/layering
     this.patterns.line2.draw({ lineColor: `rgba(${firstColor.r}, ${firstColor.g}, ${firstColor.b}, ${alpha})`, lineCount });
     this.patterns.line2.draw({ lineColor: `rgba(${secondColor.r}, ${secondColor.g}, ${secondColor.b}, ${alpha})`, lineCount });
   }
